@@ -1,0 +1,364 @@
+Steps to  Launch the Lab from LMS
+================================================
+> Go to https://lms.simplilearn.com/
+> Select DevOps Certification Training
+> Click on  labs 
+> Go to Practice Lab on left side and click on it
+> Click on DevOps in AWS V2
+> Click on Launch Lab button at right bottom
+> Click on RDP (Remote Desktop protocol) access 
+> Click on Start Instance button and click Yes
+> It will take a while for the lab environment to start. Pls wait
+> Click on RDP Access
+> Click on Auth URL - blue button - to launch the lab
+> Lab will launch , click on OK button to proceed
+> Lab desktop will launch
+
+************
+IF ANY ISSUES WITH ACCESSING THE LAB- PLS REACH OUT TO SUPPORT TEAM
+*************
+
+Linux  Commands
+******************
+> Click on the Terminal button [ it will be a square black button].
+> Terminal application will open.
+
+> Linux commands are case sensitive.
+
+To check the OS
+
+            $ uname
+
+Check the OS distribution and its version
+
+$ cat /etc/os-release
+
+
+
+Clean up the screen
+      
+             $ clear
+
+Check all the commands executed
+$ history
+
+Become the root user:
+$ sudo su -
+
+Print working directory
+     
+           $ pwd
+
+
+
+Create a empty directory on your lab
+$ mkdir myfiles
+$ ls → check if directory got created or not
+
+Go inside a directory
+
+
+           $ cd myfiles
+     
+
+Create a empty file inside the directory
+           
+             $ touch file1
+
+
+
+Add content to the empty file
+
+$ echo "this is my first file" > file1
+
+Append the content in the file
+
+$ echo “this is second line” >> file1
+
+
+Print the content of the file
+$ cat file1
+
+Note: extra command:
+
+File command: will tell the details about the file
+
+ $ file file1
+ $ file -b file1
+
+===========================================================
+In linux : you will find 3 types of editors
+vi, vim & nano
+
+Create a file using vim editor
+$ vim file2
+
+This command will create the file and open the file for you
+
+After this to insert data 
+
+Press i
+
+Enter required data/lines
+
+To save the data and come out of the file
+
+Press ESC key on your keyboard
+
+Then enter 
+:wq
+
+Press enter key
+
+Create a file using nano editor
+ 	 nano file4
+     Inside the file, you can directly write into the file
+
+       Then to save the modifications,
+         Press ctl x
+       Press y
+        Enter key
+Comout of the file and save the file
+
+Copy the content of the file into a new file
+
+	Syntax:  cp <oldfile> <newfilename>
+
+            $  cp file1 newfile
+    
+           $ ls
+
+It will show both the files, newfile will have same content as that of file1
+
+     
+Copy a file from current directory into another directory
+          mkdir myproject
+mv file* ./myproject
+
+
+ Rename a file
+
+Syntax:  mv <oldfilename> <newfilename>
+
+$ mv newfile file1
+
+
+
+Create a directory and move file from myfiles directory to new directory
+
+$ mkdir mydemo
+
+Syntax : mv </path/filename>  </path/directory>
+
+$ mv file1 mydemo
+$ ls mydemo
+
+
+Delete a file / delete a directory
+
+$ rm  filename
+
+$ rm -rf  <directory name>
+
+Modify permission of a file
+============================
+ 
+3 permissions are given to a file
+
+r : read   ===>  4
+w: write    ⇒ 2
+x: executable  ===> 1
+- : no permissions ⇒ 0
+Permissions are same for files and directories
+
+3 types of  users in linux for  a files
+
+u: User who created the file
+
+g: the Group name of the user that created the file
+
+o: All the other users in linux system
+
+a: for all users+group+other
+
+Example:
+
+-rw-r--r--  1 root root  689 Feb 11 16:22 file1
+
+rw-  : read write permission to the user
+r--  : only read permission to group user
+r--:  only read permission to other user in linux
+
+
+
+
+Change permission of a file for main user of the file
+
+Give executable permission to main user
+
+$ chmod u+x file1
+
+$ ls -al
+
+-rwxrw-r--  1 mittalsonal04gm mittalsonal04gm   13 May  8 17:00 file1
+
+Change permission of a file for group user of the file
+
+Give executable permission to main user
+
+$ chmod g+x file1
+
+$ ls -al
+
+$ chmod a+x file1
+
+$ ls -al
+
+Remove permissions
+
+chmod g-x file1
+
+
+$ chmod 666 file1
+
+6 ⇒ 4+2 (read & write) ⇒ owner
+6 ⇒  4+2 (read & write) ⇒ group
+6 ⇒  4+2 (read & write) ⇒ all
+
+
+==============================
+
+Read permission  = 4
+Write permission = 2
+Execute = 1
+
+If we have to give read and write permission to user, group and other
+
+chmod 666 file1
+
+If we have to read permission to only user. No permission to group and other
+
+chmod 400 file1
+
+If we want to give all permission to user, group and others
+
+chmod 777 file1
+
+============================================
+
+Install a package on the linux OS -> ubuntu
+
+$ cd   ===> you will on the root directory
+   	$  apt-get install tree
+
+You have to be a root user
+$ sudo su -    ⇒ change current user to super user user(root)
+
+To change any other user
+
+su mittalsonal04gm
+
+
+Create a user in linux OS
+
+$ useradd alice
+
+To see details of different users on the OS
+
+$ cat /etc/passwd
+
+Delete a user
+
+$ userdel alice
+
+
+Assignment:
+*****************
+
+> Add few lines from 1 file to another file
+# sed -n ‘2,20p’ file2 >> file5
+
+OR
+
+# head -n 15 file2 >> file5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
