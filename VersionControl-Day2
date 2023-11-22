@@ -215,81 +215,7 @@ $ git commit -m “added .gitignore”
 
 
 
-   Scenario 8:
-********
-
-Changes are in  Unstagged , if we no longer need them, how can we remove that using git
-
-Take an existing file which is already tracked by git
-
-Make changes into it
-
-$ vim index1.html
-
-Add new lines
-
-Save the file
-
-$ git status ⇒ modified
-
-If user do not want those changes
-$ git restore index1.html
-
-
-Changes will be discarded from the file that is in working directory
-
-
-OR
-
-$ git checkout -- filename
-
-Move the changes back to the Unstagged area
-
-Make changes into it
-
-$ vim index1.html
-
-Add new lines
-
-Save the file
-
-$ git status ⇒ modified
-
-$ git add .
-
-From staging move back to working directory
-
-$ git status
-
-$ git restore --staged index1.html
-
-OR
-
-$ git reset HEAD index1.html
-
-==================
-
-RESET COMMAND IN GIT
-=============================
-
-632  git log --oneline
-  633  git reset --hard d72aee6
-  634  clear
-  635  git log --oneline
-  636  ls
-  637  git ls-files
-  638  git status
-  639  git reset --soft 698d3ff
-  640  clear
-  641  git status
-  642  git commit -a -m "signle commit"
-  643  git log --oneline
-  644  git reset --mixed 5e57f1a
-
-===============================
-
-
-Scenario 10:
+  
 =========================================================
 Revert 
 
@@ -350,10 +276,6 @@ Execute below command to see index1.html file in WD and LR
 
 =========================================
 
-Note:
-git restore --source=c5f567 file1/to/restore file2/to/restore
-Or if you want to restore to the content of one commit before c5f567:
-git restore --source=c5f567~1 file1/to/restore file2/to/restore
 
 
 Branching & Merging
