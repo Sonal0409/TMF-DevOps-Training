@@ -1,8 +1,7 @@
 Version Control with GIT
 ********************
-
-Scenario 1:
-=================================
+Extra command:
+=========================
 Check if we have git installed or not on lab
 
 $ sudo su -
@@ -11,8 +10,6 @@ $  git --version
 git version 2.34.1
 
 If git is not installed use following commands to install in it
-
-Extra command:
 
 Install git on ubuntu OS
 
@@ -29,7 +26,7 @@ https://git-scm.com/download/win
 
 
 
-Scenario 2:
+Scenario 1:
 =============================================
 Create a working directory
 
