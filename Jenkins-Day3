@@ -25,7 +25,34 @@ Install jenkins:
 # systemctl status jenkins
 
 Set up dashboad
+We need to now  set up jenkins dashboard
 
+For this, take public ip address of ec2 server, copy it and go to your browser and give
+
+publicipaddress:8080
+
+On the ec2 server, execute below command
+
+$ cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Copy the password and paste in the browser (jenkins)
+
+Click on continue
+
+Click on Jenkins suggested plugin tab(on left side)
+
+On the next page
+
+Username: admin
+Password : admin
+Retype password: admin
+Email: admin@gmail.com
+
+Click on continue
+
+Click on finish
+
+You will be on the jenkins dashboard
 
 
 
