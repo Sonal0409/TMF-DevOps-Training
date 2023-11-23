@@ -1,6 +1,34 @@
 
 Continuous Integration with Jenkins:
 ===============================================
+Install jenkins:
+=====================
+
+# apt update
+
+Install java 
+
+# sudo apt install default-jre
+
+Install jenkins:
+
+# sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+# echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+# apt-get update
+
+# apt-get install jenkins
+
+# systemctl start jenkins
+
+# systemctl status jenkins
+
+Set up dashboad
+
+
+
+
 
 Go to lab terminal
 
