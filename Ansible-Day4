@@ -172,22 +172,24 @@ Save the file
 
 The complete playbook is:
 
-
-
-
-- hosts: localhost
+- name: Deploy HTML code
+  hosts: localhost
   become: true
+  become_user: root
   tasks:
-  - name: update repo
-    command: apt update -y
-  - name: Install a package apache2
-    apt: name=apache2 state=present
-  - name: Start apache2 service
+  - name: Print a Message for User
+    debug: msg="Start the playbook Execution"
+  - name: Update the apt repo
+    command: apt-get update
+  - name: Install apache2 server
+    package: name=apache2 state=present
+  - name: Start the apache2 server
     service: name=apache2 state=started
-  - name: Deploy index.html file
+  - name: Deploy the html file on apache server
     copy: src=index.html dest=/var/www/html
   - name: restart apache2 server
     service: name=apache2 state=restarted
+
 
 
 Execute the playbook
