@@ -133,14 +133,19 @@ Press i
 and enter below code
 
 
-- hosts: localhost
+- name: Deploy HTML code
+  hosts: localhost
   become: true
   become_user: root
   tasks:
-  - name: update repo command
-    command: apt update
-  - name: Install package apache2
+  - name: Print a Message for User
+    debug: msg="Start the playbook Execution"
+  - name: Update the apt repo
+    command: apt-get update
+  - name: Install apache2 server
     package: name=apache2 state=present
+  - name: Start the apache2 server
+    service: name=apache2 state=started
 
 
 And save the file
