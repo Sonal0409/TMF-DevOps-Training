@@ -69,11 +69,12 @@ provider "aws" {
 
   region     = "us-east-1"
 
-  access_key = "AKIAUJU24ZR3XTD4A6PC"
+  access_key = "AKIAUJU24ZR3W35FFOVM"
 
-  secret_key = "pu9vAfIuO//K5vgX5Ty5z+IqZjvCKrH/fZKZ+1eS"
+  secret_key = "E5zdeg6jipPMmBsXCXfRmoa8jtOT2jamaHVf/Kmn"
 
 }
+
 
 
 Note: replace access key and secret key with your values.
@@ -115,11 +116,12 @@ provider "aws" {
 
   region     = "us-east-1"
 
-  access_key = "AKIAUJU24ZR3XTD4A6PC"
+  access_key = "AKIAUJU24ZR3W35FFOVM"
 
-  secret_key = "pu9vAfIuO//K5vgX5Ty5z+IqZjvCKrH/fZKZ+1eS"
+  secret_key = "E5zdeg6jipPMmBsXCXfRmoa8jtOT2jamaHVf/Kmn"
 
 }
+
 
 resource "aws_instance" "myec2"{
 
