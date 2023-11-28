@@ -8,24 +8,9 @@ Execute below command to install terraform:
 
 # sudo su -
 
-#  wget https://releases.hashicorp.com/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip
-
-
-[Optional]
-Instal unzip package if it is not available on your lab
-
-$ sudo apt-get install -y unzip   → [Optional]
-
-
-Unzip the terraform_1.4.6_linux_amd64.zip file
-
-# unzip terraform_1.5.5_linux_amd64.zip
-
-$ ls
-
-Move terraform to bin directory
-
-$ sudo mv terraform /usr/local/bin/
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
 
 Verify:
 $ terraform --version
