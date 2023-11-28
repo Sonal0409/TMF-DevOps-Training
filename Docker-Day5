@@ -1,0 +1,163 @@
+DOCKER - Notes 
+=================================
+Lab already has docker installed
+
+$ sudo su -
+
+** One has to be a root user to execute docker commands
+
+$ docker --version
+
+Start the docker engine
+
+$ systemctl start docker
+
+
+
+Docker Images:
+*************************
+
+Demo1: Pull Image from docker hub to your local docker host
+
+# docker pull imagename
+
+# docker pull ubuntu
+
+Docker will pull the image with tag as latest from docker hub library
+
+OR
+
+docker pull imagename:tagname
+
+$ docker pull ubuntu:20.04
+
+Will pull ubuntu image of tag 20.04
+
+2. Check the list of  images pulled from docker host
+
+$ docker images
+
+OR
+
+$ docker image ls
+Demo 2:
+=================================
+
+Remove an Image from docker host
+
+# docker rmi ubuntu
+
+# docker images
+
+
+Demo 3: Docker RUN command
+========================================
+
+Pull an Image ubuntu from docker hub and run the image to create a container
+
+# docker run ubuntu
+
+# docker images
+Lists the images in docker host, ubuntu image will be there
+
+# docker ps -a
+List of containers in the docker host created, ubuntu container will be there.
+
+Demo 4: RUN command options:
+================================================
+
+Launch a container from an Image and container should be up & running
+
+When we execute the run command we have to mention in which mode we want to launch the container
+
+Foreground mode (-it)
+====================================
+
+$ docker run -it imagename
+
+-i : interactive
+-t: terminal
+
+$ docker run -it ubuntu
+
+Container will be launched
+Will be up & running
+User will be attached to the terminal of the container
+That is , user will be on the container terminal
+
+Come out of the container
+
+Ctl pq
+
+User will come out of the container  and container will be still up and running
+
+exit
+
+User will come out of the container and container will be exited
+
+
+Attach to the terminal of the Up and running container again:
+
+$ docker attach containerid/containername
+
+Execute exit command to comeout of container
+
+User will come out of the container and container will be exited
+
+To start a exited container:
+
+$ docker start containerid/name
+
+If we have a container which is up & running and we want to change its status to Exited
+
+$ docker stop containerid/name
+
+
+==========================================
+
+Demo1: Detached Mode (-d)
+=====================================
+> This option has to be given with run command
+> A container will be created
+> Container will up and running in the background
+> User will be not be attached to the terminal of the container
+
+…
+docker run --name web -d nginx
+…
+
+…
+docker inspect web
+…
+
+Demo 2:
+=========================
+If a container is running in a detached mode, but as an admin you wish to attach to the terminal of the container OR you wish to execute a command on the container  from host terminal itself
+
+
+…
+docker exec -it n1 bash
+…
+
+Port mapping or port forwarding:(-p or -P)
+=======================================
+
+Port mapping
+
+This concept allows a user to access the container from browser of your machine
+
+This concept is not applicable to OS images, it is applicable only for Web images and DB images
+
+*** Portmapping need to be done at run time --> docker run -P imagename
+
+if the container is already created --> port mapping cannot be done
+The container will be waste... we have to recreate the container with port mappign flag
+
+
+ docker run -d --name n2 -p 8989:80 nginx
+ docker ps -a
+ docker port n2
+ docker run -d --name h1 -P httpd
+
+================================================================
+
