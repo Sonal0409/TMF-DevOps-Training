@@ -161,3 +161,324 @@ The container will be waste... we have to recreate the container with port mappi
 
 ================================================================
 
+Access the container OR execute a command on the container from the host machine
+=====================================================================
+Take a container name which is running and which has port mapping done
+
+$ docker exec -it containername command
+
+$ docker exec -it web bash
+
+
+Clean up docker host:
+************************
+Delete  all containers at once
+
+$ docker rm -f $(docker ps -aq)
+$ docker rm -f containername
+
+Delete all images:
+
+$ docker system prune –all
+
+Delete all images
+ Delete exited container
+============================================
+
+Create your custom Image
+********************
+
+Introduction to docker file
+
+Custom image is created from a dockerfile
+Name of the file is going to be dockerfile always
+You can version control these dockerfile in SCM
+
+Create an Image that will deploy index.html file on a container that has nginx webserver 
+
+$ mkdir demodockerfile
+$ cd demodockerfile
+$ vim index.html
+<h1> file from docker </h1>
+Esc :wq!
+$ vim dockerfile
+
+
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY index.html /var/www/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+
+$ docker build -t mynginx .
+
+$ docker images
+
+ Create your custom Image
+********************
+
+Introduction to docker file
+
+Custom image is created from a dockerfile
+Name of the file is going to be dockerfile always
+You can version control these dockerfile in SCM
+
+Create an Image that will deploy index.html file on a container that has nginx webserver 
+
+$ mkdir demodockerfile
+$ cd demodockerfile
+$ vim index.html
+<h1> file from docker </h1>
+Esc :wq!
+$ vim dockerfile
+
+
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY index.html /var/www/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+$ docker build -t mynginx .
+
+-t : tag the name to image
+
+$ docker images
+
+
+Your image with the name mynginx will be there.
+
+
+Push the Custom image in to public registry (dockerhub), so that others can also pull your image from dockerhub
+===================================================================================
+Step1: Create a userid and password in docker hub
+
+Sign up on https://hub.docker.com/
+
+Step 2:
+
+In order to push image from host to docker hub —> you need to login from host machine to dockerhub
+
+$ docker login
+
+Username: <dockerhubusername>
+Password: <password>
+
+Step3: lets push the custom image into docker hub
+
+$ docker push <CustomImagename> → push in to docker hub library, which you dont have access to
+
+Change the name of the Image for it to be pushed into our repository on docker hub
+
+$ docker tag oldImagename reposname/mynginx
+
+$ docker tag mynginx sonal04/mynginx
+
+Step 4: push to docker hub
+
+$ docker push sonal04/mynginx
+
+================================
+Docker network
+***************************
+
+$ docker network ls
+
+List of networks that are in your docker host
+The default network that all containers in a docker host use is BRIDGE network
+
+Step1:
+
+Create your 2 custom bridge network
+
+$ docker network create --driver bridge net1
+
+$ docker network create --driver bridge net2
+
+$ docker network ls
+
+Step 2:
+
+Create container 1 and place it in network net1
+
+
+$ docker run -itd --name c1 --network net1 busybox
+
+
+$ docker inspect c1
+
+Copy the ip address : 172.19.0.2
+
+Create container 2 and place it in the same network net1
+
+$ docker run -itd --name c2 --network net1 busybox
+
+$ docker inspect c2
+
+Copy the ip address : 172.19.0.3
+
+====================
+# docker attach c1
+
+# ping c2
+
+You will get the response
+
+Press CTL C to come out of it.
+============================ 
+
+
+
+Create container 3 and place it in the network net2
+
+$ docker run -itd --name c3 --network net2 busybox
+
+$ docker inspect c3
+
+Copy the ip address : 172.20.0.2
+
+$ docker attach c3
+
+$ ping c2  ⇒ no response
+
+$ ping c1 ⇒ no response
+
+=============================
+
+Query all the containers that are part of a network
+*****
+docker network inspect net1 -f "{{json .Containers }}"
+
+================================
+
+Disconnect a container form a network:
+
+# docker network disconnect <networkname> containernam
+
+Connect a container to a network
+
+# docker network connect <networkname> containername
+
+=====================================
+
+Remove the network:
+***********
+
+# delete containers
+
+# docker rm -f $(docker ps -aq)
+
+# docker network rm net1 net2
+
+========================================================
+
+
+
+Docker-compose
+
+If you want to create multiple containers from different images at one go, you will make use of docker tool → docker COMPOSE
+
+
+Write a file with information of what container we want, what should be image, port, volume, env variable
+
+This file is written in YAML
+It is not a programming language
+Its not a scriptitng language
+Its a file format
+It store the data in key and value format
+
+Name of the file is : docker-compose.yml
+
+Docker compose is a tool to be installed on Docker host
+
+Install Docker-compose on Lab
+
+ curl -SL https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+ sudo chmod +x /usr/local/bin/docker-compose
+  docker-compose --version
+
+====================
+
+Docker compose DEMO:
+=======================
+
+Create a compose file
+
+mkdir composedemo
+cd composedemo
+vim docker-compose.yml
+
+version: '3'
+services:
+ compose-test:
+  image: centos:7
+  networks:
+   - compnet
+  command: sleep infinity
+  depends_on:
+   - compose-db
+ compose-db:
+  image: redis
+  ports:
+   - '6379:6379'
+  networks:
+   - compnet
+networks:
+ compnet:
+
+
+
+
+
+Press esc :wq!
+
+$ docker-compose up -d
+
+$ docker-compose ps
+
+$ docker-compose exec compose-test /bin/bash 
+
+OR
+
+$ docker-compose exec compose-test sh
+
+On the test container we need to ping DB container (6379)
+
+To do this we need to install ncat package
+
+$ yum install nc -y
+
+Use ncat command to connect to container with name compose-db
+
+$ nc compose-db 6379
+
+
+
+
+ping
++PONG
+
+set name sonal
++OK
+
+set day sunday
++OK
+
+get name
+$5
+sonal
+
+get day
+$6
+sunday
+
+Ctl C
+
+Exit ⇒ out of container
+
+Stop & Delete all containers created using docker-compose file
+
+$ docker-compose down
