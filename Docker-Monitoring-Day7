@@ -1,0 +1,77 @@
+Continuous Monitoring
+===============================================================
+
+Nagios SetUP:
+===============================================================
+
+# docker system prune --all
+# docker rm -f $(docker ps -aq)
+# sudo su -
+
+RUN the below image to create a container for nagiosxi
+
+# docker run -d -p 8282:80 --name nagiosxi lerndevops/nagios:xi5.5.6
+
+# docker ps -a --latest
+
+It is a heavy image, it will take time to create the container
+
+Go to browser of lab and give :  localhost:8282
+
+> click on access nagiosxi
+> set the timezone to new delhi
+> press next
+> USername=> nagiosadmin
+> password => nagiosadmin
+> give email address
+
+> click finish install
+
+> Click on login to Nagios XI
+> give username : nagiosadmin
+  password as nagiosadmin
+
+> agree on agreement and click on submit
+
+On host summary you will see 1 host, that it is monitoring itself
+
+Setup complete.
+==========================================
+
+ELK stack setup:
+===================================
+
+$ sudo su -
+$ cd
+$ git clone https://github.com/Sonal0409/ELKExample.git
+$ cd ELKExample
+
+$ docker-compose version
+
+$ sysctl -w vm.max_map_count=262144
+
+$ docker-compose up -d
+$ docker ps
+
+
+Browse: http://localhost:5601/app/kibana
+
+Deploy spring boot application:
+=====================================
+
+In the same folder we have a dockerfile. Let us build it:
+
+# docker build -t springboot .
+
+Create a container with your new Image:
+
+# docker run -d -p 81:8080 -v /var/log/:/var/log/  springboot
+
+Check the container is running:
+
+# docker ps -a --latest
+
+GO to browser:
+
+Localhost:81
+
